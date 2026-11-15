@@ -1,0 +1,27 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="MIT"
+[[mods]]
+modId="saintsdragons"
+version="0.9.88"
+displayName="Saint's Dragons"
+authors="Leon Saint"
+description='''NeoForge 1.21.1 port in progress.'''
+[[dependencies.saintsdragons]]
+modId="neoforge"
+type="required"
+versionRange="[21.1.252,)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.saintsdragons]]
+modId="minecraft"
+type="required"
+versionRange="[1.21.1,1.22)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.saintsdragons]]
+modId="geckolib"
+type="required"
+versionRange="[4.7.3,)"
+ordering="AFTER"
+side="BOTH"
