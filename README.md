@@ -2,7 +2,7 @@
 
 Target: Minecraft 1.21.1, NeoForge 21.1.252, Java 21.
 
-**Status: early port in progress; not playable yet.** Bootstrap, shared platform interfaces, NeoForge registry/config/network adapters, and several shared gameplay utilities have been ported. Current migrated utilities include dragon gender/variant/locomotion primitives, motion math, aiming, collision-expression parsing, combat body-facing lock, generic look control, ground-effect surface snapping, weak identity caching, smooth interpolation, and temporary dragon-powered redstone tracking. Full dragon entity classes, registries, species gameplay, client rendering, datagen, mixins, and build validation remain.
+**Status: early port in progress; not playable yet.** Bootstrap, shared platform interfaces, NeoForge registry/config/network adapters, and several shared gameplay utilities have been ported. Current migrated utilities include dragon gender/variant/locomotion primitives, motion math, aiming, collision-expression parsing, combat body-facing lock, generic and humanoid body/look controllers, ground-effect surface snapping, multipart entity provider contract, weak identity caching, smooth interpolation, temporary dragon-powered redstone tracking, and the base dragon-ability section/type/runtime plus AI combat pacing component. Full dragon entity classes, registries, species gameplay, client rendering, datagen, mixins, and build validation remain.
 
 ## Build
 Use JDK 21:
