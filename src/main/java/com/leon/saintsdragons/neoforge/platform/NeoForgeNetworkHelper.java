@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Consumer;
 
 /** NeoForge custom-payload implementation of the shared packet abstraction. */
 public final class NeoForgeNetworkHelper implements NetworkHelper {
@@ -100,10 +99,10 @@ public final class NeoForgeNetworkHelper implements NetworkHelper {
     }
 
     private static final class Payload<T> implements CustomPacketPayload {
-        private final Type<Payload<T>> type;
+        private final CustomPacketPayload.Type<Payload<T>> type;
         private final T message;
 
-        private Payload(Type<Payload<T>> type, T message) {
+        private Payload(CustomPacketPayload.Type<Payload<T>> type, T message) {
             this.type = type;
             this.message = message;
         }
@@ -121,7 +120,7 @@ public final class NeoForgeNetworkHelper implements NetworkHelper {
         private final PacketDecoder<T> decoder;
         private final ServerboundHandler<T> serverHandler;
         private final ClientboundHandler<T> clientHandler;
-        private final Type<Payload<T>> payloadType;
+        private final CustomPacketPayload.Type<Payload<T>> payloadType;
         private final StreamCodec<RegistryFriendlyByteBuf, Payload<T>> codec;
 
         private PayloadRegistration(Class<T> messageType, ResourceLocation id,
@@ -134,7 +133,7 @@ public final class NeoForgeNetworkHelper implements NetworkHelper {
             this.decoder = decoder;
             this.serverHandler = serverHandler;
             this.clientHandler = clientHandler;
-            this.payloadType = new Type<>(id);
+            this.payloadType = new CustomPacketPayload.Type<>(id);
             this.codec = StreamCodec.of(
                     (RegistryFriendlyByteBuf buffer, Payload<T> payload) -> encoder.encode(payload.message, buffer),
                     (RegistryFriendlyByteBuf buffer) -> new Payload<>(payloadType, decoder.decode(buffer))
