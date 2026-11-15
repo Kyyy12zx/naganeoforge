@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+    id 'net.neoforged.moddev' version '2.0.107'
+}
+group = mod_group
+version = mod_version
+base { archivesName = 'saintsdragons-neoforge' }
+java { toolchain.languageVersion = JavaLanguageVersion.of(21) }
+neoForge {
+    version = neoforge_version
+    runs {
+        client { client() }
+        server { server() }
+    }
+    mods { saintsdragons { sourceSet sourceSets.main } }
+}
+repositories {
+    mavenCentral()
+    maven { url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
+}
+dependencies {
+    implementation "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
+}
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 21
+}
