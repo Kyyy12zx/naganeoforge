@@ -1,7 +1,7 @@
 package com.leon.saintsdragons.common.config;
 
 import com.leon.saintsdragons.common.SaintsDragonsCommon;
-import com.leon.saintsdragons.platform.Services;
+import net.neoforged.fml.loading.FMLPaths;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -22,7 +22,7 @@ public final class ConfigStorageLayout {
         }
         migrated = true;
 
-        Path root = Services.PLATFORM.getConfigDirectory();
+        Path root = FMLPaths.CONFIGDIR.get();
         Path config = root.resolve("saintsdragons");
         copyLegacyFile(config.resolve("client.toml"),
                 config.resolve("client/clientcommon.toml"));
