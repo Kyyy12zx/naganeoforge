@@ -25,6 +25,7 @@ public final class SaintsDragonsNeoForge {
         event.addListener(DragonAttributeConfigLoader.getInstance());
     }
     private void commonSetup(final FMLCommonSetupEvent event) {
+        DragonAttributeConfigLoader.bootstrap();
         LOGGER.info("Saint's Dragons NeoForge common setup");
     }
 }
