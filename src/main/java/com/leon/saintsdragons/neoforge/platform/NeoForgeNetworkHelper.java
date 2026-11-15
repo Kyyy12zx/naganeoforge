@@ -108,7 +108,7 @@ public final class NeoForgeNetworkHelper implements NetworkHelper {
         }
 
         @Override
-        public Type<? extends CustomPacketPayload> type() {
+        public CustomPacketPayload.Type<? extends CustomPacketPayload> type() {
             return type;
         }
     }
