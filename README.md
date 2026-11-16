@@ -13,5 +13,6 @@ GeckoLib is declared as a required runtime dependency.
 
 The upstream project targets Forge 1.20.1 / Java 17. Its APIs and Minecraft-version changes must be migrated; the Forge entrypoint cannot simply be copied unchanged. Code migration retains upstream attribution and applicable license terms; restricted art/audio assets are not copied.
 
-
 Additional shared entity interfaces ported: DragonChestCarrier, DragonSaddleCarrier, DrinkingDragon, PassiveTreeDestroyer, ScentAssessingDragon, ShakesScreen, and HumanSoundProfile, jukebox dancing, and movement capability enum.
+
+Also migrated the Raevyx lightning damage-type key/factory and its 1.21.1 datapack damage-type and lightning-tag definitions. These are groundwork only; full entity integration and build validation remain pending.
