@@ -55,6 +55,9 @@ public final class DragonVariantSet {
     }
 
     public static DragonVariantSet of(DragonVariant... variants) {
+        if (variants == null) {
+            throw new IllegalArgumentException("Dragon variant array must not be null");
+        }
         return new DragonVariantSet(variants.clone());
     }
 
