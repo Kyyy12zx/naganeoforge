@@ -24,7 +24,7 @@ public interface DragonPartEntity {
             return false;
         }
         float multiplier = getDamageMultiplier();
-        if (parent == null || !parent.isAlive() || parent.isRemoved() || part.isRemoved()
+        if (source == null || parent == null || !parent.isAlive() || parent.isRemoved() || part.isRemoved()
                 || parent.level() != part.level() || !Float.isFinite(amount) || amount <= 0
                 || !Float.isFinite(multiplier) || multiplier <= 0
                 || part.isInvulnerableTo(source)) {
@@ -33,6 +33,10 @@ public interface DragonPartEntity {
         if (part.level().isClientSide) {
             return !parent.isInvulnerableTo(source);
         }
-        return parent.hurt(source, amount * multiplier);
+        float scaledAmount = amount * multiplier;
+        if (!Float.isFinite(scaledAmount) || scaledAmount <= 0) {
+            return false;
+        }
+        return parent.hurt(source, scaledAmount);
     }
 }
