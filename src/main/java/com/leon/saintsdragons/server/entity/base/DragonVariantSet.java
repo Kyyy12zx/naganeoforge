@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 public final class DragonVariantSet {
@@ -70,6 +71,7 @@ public final class DragonVariantSet {
     }
 
     public int roll(RandomSource random) {
+        Objects.requireNonNull(random, "random");
         int roll = random.nextInt(totalWeight);
         for (DragonVariant variant : variants) {
             roll -= variant.weight();
