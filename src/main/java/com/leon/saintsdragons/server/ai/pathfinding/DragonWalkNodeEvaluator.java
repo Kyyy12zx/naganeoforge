@@ -3,6 +3,7 @@ package com.leon.saintsdragons.server.ai.pathfinding;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.level.pathfinder.Node;
@@ -28,7 +29,7 @@ public class DragonWalkNodeEvaluator extends WalkNodeEvaluator implements Dragon
     }
 
     public DragonWalkNodeEvaluator(boolean canPassThroughTrees) {
-        this(state -> canPassThroughTrees, false);
+        this(state -> canPassThroughTrees && (state.is(BlockTags.LOGS) || state.is(BlockTags.LEAVES)), false);
     }
 
     public DragonWalkNodeEvaluator(boolean canPassThroughTrees, boolean avoidWater) {
