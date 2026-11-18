@@ -24,7 +24,7 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.fml.loading.FMLPaths;
-import net.neoforged.neoforge.bus.api.IEventBus;
+import net.neoforged.bus.api.IEventBus;
 
 import java.nio.file.Path;
 import java.util.Objects;
