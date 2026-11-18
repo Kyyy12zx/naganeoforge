@@ -7,6 +7,7 @@ import com.leon.saintsdragons.common.config.dragon.DragonAttributeConfigLoader;
 import com.leon.saintsdragons.common.network.MessageCameraImpulse;
 import com.leon.saintsdragons.common.registry.ModAttributes;
 import com.leon.saintsdragons.common.registry.ModSounds;
+import com.leon.saintsdragons.server.entity.variant.DragonVariantReloadListener;
 import com.leon.saintsdragons.neoforge.platform.NeoForgePlatformHelper;
 import com.leon.saintsdragons.platform.Services;
 import net.neoforged.bus.api.IEventBus;
@@ -41,6 +42,7 @@ public final class SaintsDragonsNeoForge {
 
     private void addReloadListeners(AddReloadListenerEvent event) {
         event.addListener(DragonAttributeConfigLoader.getInstance());
+        event.addListener(DragonVariantReloadListener.getInstance());
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
