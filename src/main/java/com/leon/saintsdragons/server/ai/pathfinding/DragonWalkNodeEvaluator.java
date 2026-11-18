@@ -33,7 +33,7 @@ public class DragonWalkNodeEvaluator extends WalkNodeEvaluator implements Dragon
     }
 
     public DragonWalkNodeEvaluator(boolean canPassThroughTrees, boolean avoidWater) {
-        this(state -> canPassThroughTrees, avoidWater);
+        this(state -> canPassThroughTrees && (state.is(BlockTags.LOGS) || state.is(BlockTags.LEAVES)), avoidWater);
     }
 
     public DragonWalkNodeEvaluator(Predicate<BlockState> canPassThroughTrees) {
