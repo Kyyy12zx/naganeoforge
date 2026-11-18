@@ -29,7 +29,7 @@ public final class DragonGriefingRules {
     }
 
     public static boolean isProtectedFromPassiveTreeDestruction(ServerLevel level, BlockPos pos) {
-        if (level == null || pos == null) {
+        if (level == null || pos == null || !level.hasChunkAt(pos)) {
             return true;
         }
         for (Structure structure : level.structureManager().getAllStructuresAt(pos).keySet()) {
