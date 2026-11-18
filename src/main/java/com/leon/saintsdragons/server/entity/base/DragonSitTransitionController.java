@@ -1,5 +1,7 @@
 package com.leon.saintsdragons.server.entity.base;
 
+import java.util.Objects;
+
 public final class DragonSitTransitionController {
     private final DragonEntity dragon;
     private int transitionTicks;
@@ -7,10 +9,14 @@ public final class DragonSitTransitionController {
     private boolean standingUp;
 
     public DragonSitTransitionController(DragonEntity dragon) {
-        this.dragon = dragon;
+        this.dragon = Objects.requireNonNull(dragon, "dragon");
     }
 
     public void tick(int sitDownTicks, int sitUpTicks, Runnable sitDownAnimation, Runnable sitUpAnimation) {
+        Objects.requireNonNull(sitDownAnimation, "sitDownAnimation");
+        Objects.requireNonNull(sitUpAnimation, "sitUpAnimation");
+        sitDownTicks = Math.max(1, sitDownTicks);
+        sitUpTicks = Math.max(1, sitUpTicks);
         if (dragon.level().isClientSide) {
             return;
         }
