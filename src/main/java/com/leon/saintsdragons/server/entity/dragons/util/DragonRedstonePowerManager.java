@@ -21,19 +21,33 @@ public final class DragonRedstonePowerManager {
     }
 
     public static void update(ServerLevel level, UUID source, Set<BlockPos> positions) {
-        if (positions.isEmpty()) {
+        if (level == null || source == null) {
+            return;
+        }
+        if (positions == null || positions.isEmpty()) {
             clear(level, source);
             return;
         }
 
         Set<BlockPos> storedPositions = new HashSet<>();
         for (BlockPos pos : positions) {
-            storedPositions.add(pos.immutable());
+            if (pos != null) {
+                storedPositions.add(pos.immutable());
+            }
         }
-        POWERED_WIRES.computeIfAbsent(level, ignored -> new HashMap<>()).put(source, storedPositions);
+        if (storedPositions.isEmpty()) {
+            clear(level, source);
+            return;
+        }
+
+        POWERED_WIRES.computeIfAbsent(level, ignored -> new HashMap<>())
+                .put(source, storedPositions);
     }
 
     public static void clear(ServerLevel level, UUID source) {
+        if (level == null || source == null) {
+            return;
+        }
         Map<UUID, Set<BlockPos>> levelSources = POWERED_WIRES.get(level);
         if (levelSources == null) {
             return;
@@ -45,6 +59,9 @@ public final class DragonRedstonePowerManager {
     }
 
     public static boolean isBeamPowered(Level level, BlockPos pos) {
+        if (level == null || pos == null) {
+            return false;
+        }
         Map<UUID, Set<BlockPos>> levelSources = POWERED_WIRES.get(level);
         if (levelSources == null) {
             return false;
