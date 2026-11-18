@@ -5,12 +5,14 @@ import com.leon.saintsdragons.server.entity.base.RideableDragonBase;
 import net.minecraft.world.phys.AABB;
 
 import java.util.EnumSet;
+import java.util.Objects;
 
 public interface DragonMovementCapable {
     EnumSet<DragonMovementCapability> movementCapabilities();
 
     default boolean hasMovementCapability(DragonMovementCapability capability) {
-        return movementCapabilities().contains(capability);
+        return Objects.requireNonNull(movementCapabilities(), "movementCapabilities")
+                .contains(Objects.requireNonNull(capability, "capability"));
     }
 
     default boolean canWalk() {
