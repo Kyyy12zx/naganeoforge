@@ -6,6 +6,7 @@ import com.leon.saintsdragons.common.config.ToolsArmorConfig;
 import com.leon.saintsdragons.common.config.dragon.DragonAttributeConfigLoader;
 import com.leon.saintsdragons.common.network.MessageCameraImpulse;
 import com.leon.saintsdragons.common.registry.ModAttributes;
+import com.leon.saintsdragons.common.registry.ModMemoryTypes;
 import com.leon.saintsdragons.common.registry.ModSounds;
 import com.leon.saintsdragons.server.entity.variant.DragonVariantReloadListener;
 import com.leon.saintsdragons.neoforge.platform.NeoForgePlatformHelper;
@@ -34,6 +35,7 @@ public final class SaintsDragonsNeoForge {
                 MessageCameraImpulse::handle
         );
         ModAttributes.register(modEventBus);
+        ModMemoryTypes.register(modEventBus);
         ModSounds.register(modEventBus);
         modEventBus.addListener(this::commonSetup);
         NeoForge.EVENT_BUS.addListener(this::addReloadListeners);
