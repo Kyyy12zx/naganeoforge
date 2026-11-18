@@ -20,15 +20,19 @@ public interface DragonPartEntity {
 
     default boolean hurtParent(DamageSource source, float amount) {
         Entity parent = getDragonParent();
-        Entity part = (Entity) this;
+        if (!(this instanceof Entity part)) {
+            return false;
+        }
+        float multiplier = getDamageMultiplier();
         if (parent == null || !parent.isAlive() || parent.isRemoved() || part.isRemoved()
                 || parent.level() != part.level() || !Float.isFinite(amount) || amount <= 0
+                || !Float.isFinite(multiplier) || multiplier <= 0
                 || part.isInvulnerableTo(source)) {
             return false;
         }
         if (part.level().isClientSide) {
             return !parent.isInvulnerableTo(source);
         }
-        return parent.hurt(source, amount * getDamageMultiplier());
+        return parent.hurt(source, amount * multiplier);
     }
 }
