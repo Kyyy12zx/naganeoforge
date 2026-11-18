@@ -1,5 +1,11 @@
 package com.leon.saintsdragons.common.registry;
 
+import com.leon.saintsdragons.server.ai.dragonbrain.DragonMovementIntent;
+import com.leon.saintsdragons.server.ai.dragonbrain.perception.DragonAwarenessMemory;
+import com.leon.saintsdragons.server.ai.dragonbrain.perception.DragonSensoryObservation;
+import com.leon.saintsdragons.server.ai.dragonbrain.perception.DragonTargetTrack;
+import com.leon.saintsdragons.server.ai.dragonbrain.tactical.DragonTacticalCommitment;
+import com.leon.saintsdragons.server.entity.base.DragonLocomotionMode;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.Entity;
