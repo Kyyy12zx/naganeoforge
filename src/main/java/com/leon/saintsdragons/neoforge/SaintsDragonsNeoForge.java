@@ -1,6 +1,5 @@
 package com.leon.saintsdragons.neoforge;
 
-import com.leon.saintsdragons.client.network.ClientPacketHandlers;
 import com.leon.saintsdragons.common.SaintsDragonsCommon;
 import com.leon.saintsdragons.common.config.SaintsDragonsConfig;
 import com.leon.saintsdragons.common.config.ToolsArmorConfig;
