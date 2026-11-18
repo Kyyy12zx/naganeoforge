@@ -25,6 +25,9 @@ public final class DragonVariantSet {
         int weightSum = 0;
 
         for (DragonVariant variant : variants) {
+            if (variant == null) {
+                throw new IllegalArgumentException("Dragon variant must not be null");
+            }
             if (names.put(variant.name(), variant.id()) != null) {
                 throw new IllegalArgumentException("Duplicate dragon variant name: " + variant.name());
             }
@@ -32,6 +35,9 @@ public final class DragonVariantSet {
                 throw new IllegalArgumentException("Duplicate dragon variant id: " + variant.id());
             }
             highestId = Math.max(highestId, variant.id());
+            if (variant.weight() > Integer.MAX_VALUE - weightSum) {
+                throw new IllegalArgumentException("Total dragon variant weight exceeds the supported integer range");
+            }
             weightSum += variant.weight();
         }
 
