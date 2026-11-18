@@ -9,6 +9,9 @@ final class CollisionExpression {
     private CollisionExpression(String text) { this.text = text.replaceAll("\\s+", ""); }
 
     static DoubleUnaryOperator compile(String text) {
+        if (text == null || text.isBlank()) {
+            throw new IllegalArgumentException("Collision expression must not be null or blank");
+        }
         CollisionExpression parser = new CollisionExpression(text);
         DoubleUnaryOperator result = parser.sum();
         if (parser.cursor != parser.text.length()) throw new IllegalArgumentException("Unsupported collision expression: " + text);
