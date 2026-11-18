@@ -2,6 +2,8 @@ package com.leon.saintsdragons.neoforge;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.AddReloadListenerEvent;
+import com.leon.saintsdragons.common.config.SaintsDragonsConfig;
+import com.leon.saintsdragons.common.config.ToolsArmorConfig;
 import com.leon.saintsdragons.common.config.dragon.DragonAttributeConfigLoader;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.ModContainer;
@@ -25,6 +27,8 @@ public final class SaintsDragonsNeoForge {
         event.addListener(DragonAttributeConfigLoader.getInstance());
     }
     private void commonSetup(final FMLCommonSetupEvent event) {
+        SaintsDragonsConfig.bootstrap();
+        ToolsArmorConfig.bootstrap();
         DragonAttributeConfigLoader.bootstrap();
         LOGGER.info("Saint's Dragons NeoForge common setup");
     }
