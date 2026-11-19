@@ -5,6 +5,7 @@ import com.leon.saintsdragons.common.config.SaintsDragonsConfig;
 import com.leon.saintsdragons.common.config.ToolsArmorConfig;
 import com.leon.saintsdragons.common.config.dragon.DragonAttributeConfigLoader;
 import com.leon.saintsdragons.common.network.MessageCameraImpulse;
+import com.leon.saintsdragons.common.network.MessageDragonMovingSound;
 import com.leon.saintsdragons.common.registry.ModAttributes;
 import com.leon.saintsdragons.common.registry.ModMemoryTypes;
 import com.leon.saintsdragons.common.registry.ModSounds;
@@ -34,7 +35,14 @@ public final class SaintsDragonsNeoForge {
                 MessageCameraImpulse::decode,
                 MessageCameraImpulse::handle
         );
-        ModAttributes.register(modEventBus);
+        Services.PLATFORM.getNetworkHelper().registerClientbound(
+                MessageDragonMovingSound.class,
+                SaintsDragonsCommon.rl("dragon_moving_sound"),
+                MessageDragonMovingSound::encode,
+                MessageDragonMovingSound::decode,
+                MessageDragonMovingSound::handle
+        );
+                ModAttributes.register(modEventBus);
         ModMemoryTypes.register(modEventBus);
         ModSounds.register(modEventBus);
         modEventBus.addListener(this::commonSetup);

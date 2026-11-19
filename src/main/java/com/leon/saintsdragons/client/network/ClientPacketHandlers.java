@@ -2,12 +2,26 @@ package com.leon.saintsdragons.client.network;
 
 import com.leon.saintsdragons.client.camera.ClientCameraImpulse;
 import com.leon.saintsdragons.common.network.MessageCameraImpulse;
+import com.leon.saintsdragons.common.network.MessageDragonMovingSound;
+import com.leon.saintsdragons.sound.client.DragonSoundRuntime;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.Mth;
 
 /** Client-side handlers for server-originated visual feedback packets. */
 public final class ClientPacketHandlers {
     private ClientPacketHandlers() {
+    }
+
+    public static void handleDragonMovingSound(MessageDragonMovingSound message) {
+        DragonSoundRuntime.playMoving(
+                message.playbackId(),
+                message.entityId(),
+                message.entityUuid(),
+                message.soundId(),
+                message.volume(),
+                message.pitch(),
+                message.durationTicks()
+        );
     }
 
     public static void handleCameraImpulse(MessageCameraImpulse message) {
