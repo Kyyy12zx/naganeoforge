@@ -54,9 +54,34 @@ public final class DragonSpeciesRegistry {
     }
 
     /**
-     * Resolves the registered species key from an entity's runtime type.
-     * Returns null when the entity type has not been registered in Minecraft's
-     * built-in entity registry.
+     * Finds a species definition by the entity type supplied by its registry
+     * entry. Suppliers are evaluated lazily so this lookup does not force
+     * entity registration during class initialization.
+     */
+    @Nullable
+    public static synchronized Definition getByEntityType(EntityType<?> entityType) {
+        Objects.requireNonNull(entityType, "entityType");
+        for (Definition definition : ENTRIES.values()) {
+            if (definition.entityType().get() == entityType) {
+                return definition;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns the species ID registered in this mod's species registry, or
+     * null when the entity type is not a registered dragon species.
+     */
+    @Nullable
+    public static ResourceLocation registeredSpeciesId(EntityType<?> entityType) {
+        Definition definition = getByEntityType(entityType);
+        return definition == null ? null : definition.id();
+    }
+
+    /**
+     * Resolves the Minecraft entity-type key, whether or not it is a dragon
+     * species. Use registeredSpeciesId when species membership is required.
      */
     @Nullable
     public static ResourceLocation speciesId(EntityType<?> entityType) {
