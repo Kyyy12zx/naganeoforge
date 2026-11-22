@@ -1,3 +1,20 @@
+/*
+ * Copyright (c) 2025 Leon Saint
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ */
 package com.leon.saintsdragons.server.entity.base;
 
 import net.minecraft.world.damagesource.DamageSource;
@@ -19,12 +36,13 @@ public interface DragonPartEntity {
     void updateBounds(AABB bounds);
 
     default boolean hurtParent(DamageSource source, float amount) {
-        Entity parent = getDragonParent();
         if (!(this instanceof Entity part)) {
             return false;
         }
+        Entity parent = getDragonParent();
         float multiplier = getDamageMultiplier();
-        if (source == null || parent == null || !parent.isAlive() || parent.isRemoved() || part.isRemoved()
+        if (source == null || parent == null || parent == part
+                || !parent.isAlive() || parent.isRemoved() || part.isRemoved()
                 || parent.level() != part.level() || !Float.isFinite(amount) || amount <= 0
                 || !Float.isFinite(multiplier) || multiplier <= 0
                 || part.isInvulnerableTo(source)) {
