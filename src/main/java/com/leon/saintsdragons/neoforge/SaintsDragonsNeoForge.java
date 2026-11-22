@@ -5,6 +5,7 @@ import com.leon.saintsdragons.common.config.SaintsDragonsConfig;
 import com.leon.saintsdragons.common.config.ToolsArmorConfig;
 import com.leon.saintsdragons.common.config.dragon.DragonAttributeConfigLoader;
 import com.leon.saintsdragons.common.network.MessageCameraImpulse;
+import com.leon.saintsdragons.common.network.MessageDragonPartAttack;
 import com.leon.saintsdragons.common.network.MessageDragonMovingSound;
 import com.leon.saintsdragons.common.registry.ModAttributes;
 import com.leon.saintsdragons.common.registry.ModMemoryTypes;
@@ -41,6 +42,13 @@ public final class SaintsDragonsNeoForge {
                 MessageDragonMovingSound::encode,
                 MessageDragonMovingSound::decode,
                 MessageDragonMovingSound::handle
+        );
+        Services.PLATFORM.getNetworkHelper().registerServerbound(
+                MessageDragonPartAttack.class,
+                SaintsDragonsCommon.rl("dragon_part_attack"),
+                MessageDragonPartAttack::encode,
+                MessageDragonPartAttack::decode,
+                MessageDragonPartAttack::handle
         );
                 ModAttributes.register(modEventBus);
         ModMemoryTypes.register(modEventBus);
