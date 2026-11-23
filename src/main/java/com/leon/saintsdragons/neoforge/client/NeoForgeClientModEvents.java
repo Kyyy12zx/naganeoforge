@@ -24,7 +24,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 
 /** Mod-bus registrations for client-only controls. */
-@EventBusSubscriber(modid = SaintsDragonsNeoForge.MOD_ID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = SaintsDragonsNeoForge.MOD_ID, value = Dist.CLIENT)
 public final class NeoForgeClientModEvents {
     private NeoForgeClientModEvents() {
     }
