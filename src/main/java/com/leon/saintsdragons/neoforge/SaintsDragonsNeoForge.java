@@ -6,6 +6,7 @@ import com.leon.saintsdragons.common.config.ToolsArmorConfig;
 import com.leon.saintsdragons.common.config.dragon.DragonAttributeConfigLoader;
 import com.leon.saintsdragons.common.network.MessageCameraImpulse;
 import com.leon.saintsdragons.common.network.MessageDragonPartAttack;
+import com.leon.saintsdragons.common.network.MessageDragonAbilityDebugBox;
 import com.leon.saintsdragons.common.network.MessageDragonMovingSound;
 import com.leon.saintsdragons.common.registry.ModAttributes;
 import com.leon.saintsdragons.common.registry.ModMemoryTypes;
@@ -43,6 +44,13 @@ public final class SaintsDragonsNeoForge {
                 MessageDragonMovingSound::decode,
                 MessageDragonMovingSound::handle
         );
+        Services.PLATFORM.getNetworkHelper().registerClientbound(
+                MessageDragonAbilityDebugBox.class,
+                SaintsDragonsCommon.rl("dragon_ability_debug_box"),
+                MessageDragonAbilityDebugBox::encode,
+                MessageDragonAbilityDebugBox::decode,
+                MessageDragonAbilityDebugBox::handle
+        );
         Services.PLATFORM.getNetworkHelper().registerServerbound(
                 MessageDragonPartAttack.class,
                 SaintsDragonsCommon.rl("dragon_part_attack"),
@@ -50,7 +58,7 @@ public final class SaintsDragonsNeoForge {
                 MessageDragonPartAttack::decode,
                 MessageDragonPartAttack::handle
         );
-                ModAttributes.register(modEventBus);
+        ModAttributes.register(modEventBus);
         ModMemoryTypes.register(modEventBus);
         ModSounds.register(modEventBus);
         modEventBus.addListener(this::commonSetup);

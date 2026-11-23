@@ -1,7 +1,9 @@
 package com.leon.saintsdragons.client.network;
 
 import com.leon.saintsdragons.client.camera.ClientCameraImpulse;
+import com.leon.saintsdragons.client.debug.DragonAbilityDebugClient;
 import com.leon.saintsdragons.common.network.MessageCameraImpulse;
+import com.leon.saintsdragons.common.network.MessageDragonAbilityDebugBox;
 import com.leon.saintsdragons.common.network.MessageDragonMovingSound;
 import com.leon.saintsdragons.sound.client.DragonSoundRuntime;
 import net.minecraft.client.Minecraft;
@@ -22,6 +24,12 @@ public final class ClientPacketHandlers {
                 message.pitch(),
                 message.durationTicks()
         );
+    }
+
+    public static void handleAbilityDebugBox(MessageDragonAbilityDebugBox message) {
+        if (message != null && message.isValid()) {
+            DragonAbilityDebugClient.addBox(message.box(), message.colorRgb(), message.lifetimeTicks());
+        }
     }
 
     public static void handleCameraImpulse(MessageCameraImpulse message) {
