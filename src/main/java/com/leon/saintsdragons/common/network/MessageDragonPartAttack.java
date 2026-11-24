@@ -69,6 +69,18 @@ public record MessageDragonPartAttack(int dragonId, UUID dragonUuid, int partInd
             return;
         }
 
+        // The packet's part index is a claim, not authority: resolve it against
+        // the current server-side part array before doing any hit testing.
+        Entity requestedPart = parts[message.partIndex()];
+        if (!(requestedPart instanceof DragonPartEntity requestedRegion)
+                || requestedRegion.getDragonParent() != parent
+                || requestedRegion.getPartIndex() != message.partIndex()
+                || requestedPart.level() != player.level()
+                || requestedPart.isRemoved() || !requestedPart.isAlive()
+                || !requestedPart.isPickable()) {
+            return;
+        }
+
         double reach = Services.PLATFORM.getPlayerAttackReach(player);
         if (!Double.isFinite(reach) || reach <= 0.0D) {
             return;
@@ -104,7 +116,10 @@ public record MessageDragonPartAttack(int dragonId, UUID dragonUuid, int partInd
             }
         }
 
-        if (selectedPart == null || nearestPartDistanceSqr > nearestAllowedDistanceSqr
+        // Reject stale or mismatched client targeting instead of silently
+        // attacking a different body region than the one reported.
+        if (selectedPart == null || selectedPart != requestedPart
+                || nearestPartDistanceSqr > nearestAllowedDistanceSqr
                 || !player.level().getWorldBorder().isWithinBounds(selectedPart.blockPosition())) {
             return;
         }
