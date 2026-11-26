@@ -36,6 +36,7 @@ jobs:
           find ~/.gradle/caches/modules-2/files-2.1/software.bernie.geckolib -type f -print || true
           find ~/.gradle/caches/modules-2/files-2.1/com.eliotlash.mclib -type f -print || true
           find ~/.gradle/caches/modules-2/files-2.1/software.bernie.geckolib -name '*.jar' -print -exec jar tf {} \; | grep -E 'AnimationController.class|CoreGeoBone.class' || true
+          find ~/.gradle/caches/modules-2/files-2.1/curse.maven/geckolib-388172 -name '*.jar' -print -exec jar tf {} \; | grep -E 'AnimationController.class|CoreGeoBone.class|CoreGeoModel.class|GeoBone.class' || true
 
       - name: Build NeoForge mod
         run: gradle --no-daemon build
