@@ -17,23 +17,43 @@ public final class DragonBreathComponent {
     }
 
     public static void setEnergy(Gauge gauge, float energy, float rearmThreshold) {
-        float clamped = Mth.clamp(energy, 0.0F, 1.0F);
+        if (gauge == null) {
+            return;
+        }
+        float safeEnergy = Float.isFinite(energy) ? energy : 0.0F;
+        float threshold = Float.isFinite(rearmThreshold) ? Mth.clamp(rearmThreshold, 0.0F, 1.0F) : 1.0F;
+        float clamped = Mth.clamp(safeEnergy, 0.0F, 1.0F);
         gauge.setEnergyRaw(clamped);
-        if (clamped >= rearmThreshold && gauge.isDepleted()) {
+        if (clamped >= threshold && gauge.isDepleted()) {
             gauge.setDepleted(false);
         }
     }
 
     public static boolean canUse(Gauge gauge, float depletedThreshold) {
-        return gauge.getEnergy() > depletedThreshold && !gauge.isDepleted();
+        if (gauge == null) {
+            return false;
+        }
+        float energy = gauge.getEnergy();
+        float threshold = Float.isFinite(depletedThreshold)
+                ? Mth.clamp(depletedThreshold, 0.0F, 1.0F) : 1.0F;
+        return Float.isFinite(energy) && energy > threshold && !gauge.isDepleted();
     }
 
     public static boolean drain(Gauge gauge, float amount, float depletedThreshold, float rearmThreshold) {
-        float drain = Math.max(0.0F, amount);
-        if (drain > 0.0F) {
-            setEnergy(gauge, gauge.getEnergy() - drain, rearmThreshold);
+        if (gauge == null) {
+            return false;
         }
-        if (gauge.getEnergy() <= depletedThreshold) {
+        float drain = Float.isFinite(amount) ? Math.max(0.0F, amount) : 0.0F;
+        float energy = gauge.getEnergy();
+        if (!Float.isFinite(energy)) {
+            energy = 0.0F;
+        }
+        if (drain > 0.0F) {
+            setEnergy(gauge, energy - drain, rearmThreshold);
+        }
+        float threshold = Float.isFinite(depletedThreshold)
+                ? Mth.clamp(depletedThreshold, 0.0F, 1.0F) : 1.0F;
+        if (gauge.getEnergy() <= threshold) {
             gauge.setDepleted(true);
             return false;
         }
@@ -41,12 +61,19 @@ public final class DragonBreathComponent {
     }
 
     public static void regen(Gauge gauge, float amount, float rearmThreshold) {
-        if (gauge.getEnergy() >= 1.0F) {
+        if (gauge == null) {
             return;
         }
-        float regen = Math.max(0.0F, amount);
+        float energy = gauge.getEnergy();
+        if (!Float.isFinite(energy)) {
+            energy = 0.0F;
+        }
+        if (energy >= 1.0F) {
+            return;
+        }
+        float regen = Float.isFinite(amount) ? Math.max(0.0F, amount) : 0.0F;
         if (regen > 0.0F) {
-            setEnergy(gauge, gauge.getEnergy() + regen, rearmThreshold);
+            setEnergy(gauge, energy + regen, rearmThreshold);
         }
     }
 }
