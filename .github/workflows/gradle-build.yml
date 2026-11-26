@@ -31,5 +31,11 @@ jobs:
       - name: Report compile classpath
         run: gradle --no-daemon dependencies --configuration compileClasspath
 
+      - name: Inspect resolved animation libraries
+        run: |
+          find ~/.gradle/caches/modules-2/files-2.1/software.bernie.geckolib -type f -print || true
+          find ~/.gradle/caches/modules-2/files-2.1/com.eliotlash.mclib -type f -print || true
+          find ~/.gradle/caches/modules-2/files-2.1/software.bernie.geckolib -name '*.jar' -print -exec jar tf {} \; | grep -E 'AnimationController.class|CoreGeoBone.class' || true
+
       - name: Build NeoForge mod
         run: gradle --no-daemon build
