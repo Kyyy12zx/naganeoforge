@@ -2,25 +2,51 @@ plugins {
     id 'java'
     id 'net.neoforged.moddev' version '2.0.107'
 }
+
 group = mod_group
 version = mod_version
-base { archivesName = 'saintsdragons-neoforge' }
-java { toolchain.languageVersion = JavaLanguageVersion.of(21) }
+
+base {
+    archivesName = 'saintsdragons-neoforge'
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(21)
+}
+
 neoForge {
     version = neoforge_version
     runs {
         client { client() }
         server { server() }
     }
-    mods { saintsdragons { sourceSet sourceSets.main } }
+    mods {
+        saintsdragons {
+            sourceSet sourceSets.main
+        }
+    }
 }
+
 repositories {
     mavenCentral()
-    maven { url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/' }
+    maven {
+        name = 'GeckoLib'
+        url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+        content {
+            includeGroupByRegex('software\\.bernie.*')
+            includeGroup('com.eliotlash.mclib')
+        }
+    }
 }
+
 dependencies {
     implementation "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
+
+    // DragonAnimationSampler references MCLib math types directly.
+    // GeckoLib supplies the runtime library; keep MCLib compile-only.
+    compileOnly 'com.eliotlash.mclib:mclib:20'
 }
+
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
     options.release = 21
