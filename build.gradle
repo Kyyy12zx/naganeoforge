@@ -30,6 +30,10 @@ neoForge {
 repositories {
     mavenCentral()
     maven {
+        name = 'CurseMaven'
+        url = 'https://www.cursemaven.com'
+    }
+    maven {
         name = 'GeckoLib'
         url = 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
         content {
@@ -40,7 +44,7 @@ repositories {
 }
 
 dependencies {
-    implementation "software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib_version}"
+    implementation "curse.maven:geckolib-388172:${geckolib_file_id}"
 
     // DragonAnimationSampler references MCLib math types directly.
     // GeckoLib supplies the runtime library; keep MCLib compile-only.
