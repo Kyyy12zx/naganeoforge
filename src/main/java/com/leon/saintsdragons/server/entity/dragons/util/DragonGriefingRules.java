@@ -25,11 +25,26 @@ public final class DragonGriefingRules {
                 || SaintsDragonsConfig.DRAGON_GRIEFING_ENABLED.get();
     }
 
+    /** Compatibility overload for callers that already resolved the mod config. */
+    public static boolean canDestroyBlocks(Level level, boolean configEnabled) {
+        return level != null && configEnabled
+                && level.getGameRules().getBoolean(GameRules.RULE_MOBGRIEFING);
+    }
+
     public static boolean canSetBlocksOnFire(Level level) {
         return canDestroyBlocks(level) && SaintsDragonsConfig.isFireDragonBlockIgnitionEnabled();
     }
 
+    /** Compatibility overload for callers that already resolved both config values. */
+    public static boolean canSetBlocksOnFire(Level level, boolean griefingEnabled,
+                                             boolean fireIgnitionEnabled) {
+        return canDestroyBlocks(level, griefingEnabled) && fireIgnitionEnabled;
+    }
+
     public static boolean isProtectedFromPassiveTreeDestruction(ServerLevel level, BlockPos pos) {
+        if (level == null || pos == null || !level.hasChunkAt(pos)) {
+            return true;
+        }
         for (Structure structure : level.structureManager().getAllStructuresAt(pos).keySet()) {
             StructureStart start = level.structureManager().getStructureWithPieceAt(pos, structure);
             if (start != null && start.isValid()) {
