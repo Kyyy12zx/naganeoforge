@@ -31,7 +31,10 @@ repositories {
     mavenCentral()
     maven {
         name = 'CurseMaven'
-        url = 'https://www.cursemaven.com'
+        url = 'https://cursemaven.com/'
+        content {
+            includeGroup('curse.maven')
+        }
     }
     maven {
         name = 'GeckoLib'
