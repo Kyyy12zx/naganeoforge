@@ -8,6 +8,7 @@ import com.leon.saintsdragons.common.network.MessageCameraImpulse;
 import com.leon.saintsdragons.common.network.MessageDragonPartAttack;
 import com.leon.saintsdragons.common.network.MessageDragonAbilityDebugBox;
 import com.leon.saintsdragons.common.network.MessageDragonMovingSound;
+import com.leon.saintsdragons.common.network.MessageDragonlordFlightBoost;
 import com.leon.saintsdragons.common.registry.ModAttributes;
 import com.leon.saintsdragons.common.registry.ModMemoryTypes;
 import com.leon.saintsdragons.common.registry.ModSounds;
@@ -43,6 +44,13 @@ public final class SaintsDragonsNeoForge {
                 MessageDragonMovingSound::encode,
                 MessageDragonMovingSound::decode,
                 MessageDragonMovingSound::handle
+        );
+        Services.PLATFORM.getNetworkHelper().registerClientbound(
+                MessageDragonlordFlightBoost.class,
+                SaintsDragonsCommon.rl("dragonlord_flight_boost"),
+                MessageDragonlordFlightBoost::encode,
+                MessageDragonlordFlightBoost::decode,
+                MessageDragonlordFlightBoost::handle
         );
         Services.PLATFORM.getNetworkHelper().registerClientbound(
                 MessageDragonAbilityDebugBox.class,
