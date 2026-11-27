@@ -2,7 +2,6 @@ package com.leon.saintsdragons.server.ai.dragonbrain;
 
 import net.minecraft.world.phys.Vec3;
 
-/** Tracks whether an AI movement request is progressing, stalled, or complete. */
 public final class DragonMovementProgress {
     private Vec3 destination;
     private long deadline;
@@ -56,11 +55,12 @@ public final class DragonMovementProgress {
         status = Status.IDLE;
     }
 
-    public Status status() { return status; }
+    public Status status() {
+        return status;
+    }
 
     private static boolean finite(Vec3 position) {
-        return position != null && Double.isFinite(position.x)
-                && Double.isFinite(position.y) && Double.isFinite(position.z);
+        return position != null && Double.isFinite(position.x) && Double.isFinite(position.y) && Double.isFinite(position.z);
     }
 
     public enum Status { IDLE, IN_PROGRESS, ARRIVED, BLOCKED, INVALID, TIMED_OUT }

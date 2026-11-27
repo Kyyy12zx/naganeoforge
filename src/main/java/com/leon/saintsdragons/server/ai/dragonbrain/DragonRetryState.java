@@ -1,6 +1,5 @@
 package com.leon.saintsdragons.server.ai.dragonbrain;
 
-/** Exponential-backoff retry state for bounded AI operations. */
 public final class DragonRetryState {
     private final int maxAttempts;
     private final int initialDelay;
@@ -28,8 +27,13 @@ public final class DragonRetryState {
         nextAttemptAt = now + Math.min(maxDelay, delay);
     }
 
-    public boolean exhausted() { return attempts >= maxAttempts; }
-    public int attempts() { return attempts; }
+    public boolean exhausted() {
+        return attempts >= maxAttempts;
+    }
+
+    public int attempts() {
+        return attempts;
+    }
 
     public void reset() {
         attempts = 0;
