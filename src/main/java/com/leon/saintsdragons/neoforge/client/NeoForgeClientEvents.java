@@ -2,6 +2,9 @@ package com.leon.saintsdragons.neoforge.client;
 
 import com.leon.saintsdragons.neoforge.SaintsDragonsNeoForge;
 import com.leon.saintsdragons.client.debug.DragonAbilityDebugClient;
+import com.leon.saintsdragons.client.camera.ClientCameraImpulse;
+import com.leon.saintsdragons.client.camera.BloodTempestKatanaVisuals;
+import com.leon.saintsdragons.client.camera.DragonlordFlightVisuals;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.KeyMapping;
@@ -36,6 +39,9 @@ public final class NeoForgeClientEvents {
     public static void onClientTick(ClientTickEvent.Post event) {
         Minecraft minecraft = Minecraft.getInstance();
         DragonSoundRuntime.tick(minecraft);
+        ClientCameraImpulse.tick(minecraft);
+        BloodTempestKatanaVisuals.tick(minecraft);
+        DragonlordFlightVisuals.tick(minecraft);
         DragonAbilityDebugClient.tick();
         if (minecraft.player == null) {
             return;
