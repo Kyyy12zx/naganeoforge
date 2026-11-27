@@ -1,6 +1,5 @@
 package com.leon.saintsdragons.server.ai.dragonbrain;
 
-/** Priority levels for interrupting a dragon's currently running behaviour. */
 public enum DragonBehaviourInterruption {
     NONE(0, "routine"),
     RETURN_HOME(1, "return-home"),
