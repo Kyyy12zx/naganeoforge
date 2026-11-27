@@ -1,8 +1,10 @@
 package com.leon.saintsdragons.client.network;
 
 import com.leon.saintsdragons.client.camera.ClientCameraImpulse;
+import com.leon.saintsdragons.client.camera.DragonlordFlightVisuals;
 import com.leon.saintsdragons.client.debug.DragonAbilityDebugClient;
 import com.leon.saintsdragons.common.network.MessageCameraImpulse;
+import com.leon.saintsdragons.common.network.MessageDragonlordFlightBoost;
 import com.leon.saintsdragons.common.network.MessageDragonAbilityDebugBox;
 import com.leon.saintsdragons.common.network.MessageDragonMovingSound;
 import com.leon.saintsdragons.sound.client.DragonSoundRuntime;
@@ -24,6 +26,10 @@ public final class ClientPacketHandlers {
                 message.pitch(),
                 message.durationTicks()
         );
+    }
+
+    public static void handleDragonlordFlightBoost(MessageDragonlordFlightBoost message) {
+        DragonlordFlightVisuals.startBoost();
     }
 
     public static void handleAbilityDebugBox(MessageDragonAbilityDebugBox message) {
