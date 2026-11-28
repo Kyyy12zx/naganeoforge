@@ -8,9 +8,9 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import software.bernie.geckolib.cache.GeckoLibCache;
 import software.bernie.geckolib.constant.DataTickets;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.object.DataTicket;
+import software.bernie.geckolib.animation.AnimatableManager;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.constant.dataticket.DataTicket;
 import software.bernie.geckolib.model.data.EntityModelData;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 

@@ -1,21 +1,21 @@
 package com.leon.saintsdragons.client.model;
 
-import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
+import software.bernie.geckolib.cache.object.GeoBone;
 
 import java.util.Collection;
 
 /** Reusable value snapshot for GeckoLib bones, which are shared between entities. */
 public final class DragonBonePose {
-    private CoreGeoBone[] bones = new CoreGeoBone[0];
+    private GeoBone[] bones = new GeoBone[0];
     private float[] values = new float[0];
 
-    public void capture(Collection<? extends CoreGeoBone> source) {
+    public void capture(Collection<? extends GeoBone> source) {
         if (bones.length != source.size() || (!source.isEmpty() && bones[0] != source.iterator().next())) {
-            bones = source.toArray(CoreGeoBone[]::new);
+            bones = source.toArray(GeoBone[]::new);
             values = new float[bones.length * 14];
         }
         for (int i = 0; i < bones.length; i++) {
-            CoreGeoBone bone = bones[i];
+            GeoBone bone = bones[i];
             int j = i * 14;
             values[j] = bone.getRotX();
             values[j + 1] = bone.getRotY();
@@ -36,7 +36,7 @@ public final class DragonBonePose {
 
     public void restore() {
         for (int i = 0; i < bones.length; i++) {
-            CoreGeoBone bone = bones[i];
+            GeoBone bone = bones[i];
             int j = i * 14;
             bone.updateRotation(values[j], values[j + 1], values[j + 2]);
             bone.updatePosition(values[j + 3], values[j + 4], values[j + 5]);
@@ -48,7 +48,7 @@ public final class DragonBonePose {
     }
 
     public void resetChanges() {
-        for (CoreGeoBone bone : bones) {
+        for (GeoBone bone : bones) {
             bone.resetStateChanges();
         }
     }
