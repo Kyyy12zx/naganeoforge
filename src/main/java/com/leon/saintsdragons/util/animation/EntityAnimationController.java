@@ -1,11 +1,11 @@
 package com.leon.saintsdragons.util.animation;
 
 import net.minecraft.world.entity.LivingEntity;
-import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
-import software.bernie.geckolib.core.animatable.model.CoreGeoModel;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.state.BoneSnapshot;
+import software.bernie.geckolib.animation.AnimationController;
+import software.bernie.geckolib.animation.AnimationState;
+import software.bernie.geckolib.animation.state.BoneSnapshot;
+import software.bernie.geckolib.cache.object.GeoBone;
+import software.bernie.geckolib.model.GeoModel;
 
 import java.util.Map;
 
@@ -19,7 +19,7 @@ public class EntityAnimationController<T extends LivingEntity & TickingGeoEntity
         super(entity, name, transitionTicks, predicate);
     }
 
-    public final void tickPlayback(CoreGeoModel<T> model, AnimationState<T> state, Object resource) {
+    public final void tickPlayback(GeoModel<T> model, AnimationState<T> state, Object resource) {
         if (!animatable.level().isClientSide || lastPlaybackTick == animatable.tickCount) return;
         lastPlaybackTick = animatable.tickCount;
         if (animationResource != null && animationResource != resource) forceAnimationReset();
@@ -31,11 +31,11 @@ public class EntityAnimationController<T extends LivingEntity & TickingGeoEntity
         onPlaybackTick(model, state);
     }
 
-    protected void onPlaybackTick(CoreGeoModel<T> model, AnimationState<T> state) {}
+    protected void onPlaybackTick(GeoModel<T> model, AnimationState<T> state) {}
 
     @Override
-    public void process(CoreGeoModel<T> model, AnimationState<T> state,
-                        Map<String, CoreGeoBone> bones, Map<String, BoneSnapshot> snapshots,
+    public void process(GeoModel<T> model, AnimationState<T> state,
+                        Map<String, GeoBone> bones, Map<String, BoneSnapshot> snapshots,
                         double seekTime, boolean crashWhenCantFindBone) {
         if (lastPlaybackTick != Integer.MIN_VALUE) isJustStarting = false;
         if (needsRenderSnapshots) {
