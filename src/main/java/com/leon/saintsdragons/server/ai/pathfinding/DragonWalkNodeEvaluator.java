@@ -5,7 +5,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.level.pathfinder.Node;
 import net.minecraft.world.level.pathfinder.Target;
 import net.minecraft.world.level.pathfinder.WalkNodeEvaluator;
@@ -84,18 +84,18 @@ public class DragonWalkNodeEvaluator extends WalkNodeEvaluator implements Dragon
     }
 
     @Override
-    public @NotNull BlockPathTypes getBlockPathType(BlockGetter level, int x, int y, int z) {
+    public @NotNull PathType getBlockPathType(BlockGetter level, int x, int y, int z) {
         BlockPos pos = new BlockPos(x, y, z);
         BlockState state = level.getBlockState(pos);
         if (state.is(Blocks.LADDER)) {
-            return BlockPathTypes.WALKABLE;
+            return PathType.WALKABLE;
         }
         if (this.canPassThroughTrees.test(state)) {
-            return BlockPathTypes.OPEN;
+            return PathType.OPEN;
         }
-        BlockPathTypes pathType = super.getBlockPathType(level, x, y, z);
-        if (this.avoidWater && (pathType == BlockPathTypes.WATER || pathType == BlockPathTypes.WATER_BORDER)) {
-            return BlockPathTypes.BLOCKED;
+        PathType pathType = super.getBlockPathType(level, x, y, z);
+        if (this.avoidWater && (pathType == PathType.WATER || pathType == PathType.WATER_BORDER)) {
+            return PathType.BLOCKED;
         }
         return pathType;
     }
